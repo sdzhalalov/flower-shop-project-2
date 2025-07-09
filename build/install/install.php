@@ -172,14 +172,14 @@ try {
         }
     }
     
-    // Добавляем начальные услуги
+    // Добавляем начальные товары
     $services = [
-        ['name' => 'Диагностика автомобиля', 'price' => 2500.00, 'description' => 'Полная компьютерная диагностика всех систем автомобиля', 'duration' => 60, 'category' => 'diagnostic'],
-        ['name' => 'Замена масла', 'price' => 1500.00, 'description' => 'Замена моторного масла и масляного фильтра', 'duration' => 30, 'category' => 'maintenance'],
-        ['name' => 'Ремонт тормозной системы', 'price' => 5000.00, 'description' => 'Диагностика и ремонт тормозной системы', 'duration' => 120, 'category' => 'repair'],
-        ['name' => 'Шиномонтаж', 'price' => 800.00, 'description' => 'Замена и балансировка колес', 'duration' => 45, 'category' => 'wheels'],
-        ['name' => 'Техническое обслуживание', 'price' => 3500.00, 'description' => 'Плановое ТО согласно регламенту производителя', 'duration' => 180, 'category' => 'maintenance'],
-        ['name' => 'Ремонт двигателя', 'price' => 15000.00, 'description' => 'Диагностика и ремонт двигателя', 'duration' => 480, 'category' => 'repair']
+        ['name' => 'Букет из роз', 'price' => 3500.00, 'description' => 'Классический букет из 25 красных роз с зеленью', 'duration' => 30, 'category' => 'roses'],
+        ['name' => 'Весенний букет', 'price' => 2200.00, 'description' => 'Нежный букет из тюльпанов и нарциссов', 'duration' => 20, 'category' => 'spring'],
+        ['name' => 'Свадебный букет', 'price' => 4500.00, 'description' => 'Роскошный букет невесты из белых роз и пионов', 'duration' => 60, 'category' => 'wedding'],
+        ['name' => 'Корзина цветов', 'price' => 5500.00, 'description' => 'Большая корзина с сезонными цветами', 'duration' => 45, 'category' => 'baskets'],
+        ['name' => 'Композиция в коробке', 'price' => 3200.00, 'description' => 'Стильная композиция из роз в подарочной коробке', 'duration' => 40, 'category' => 'boxes'],
+        ['name' => 'Траурный венок', 'price' => 2800.00, 'description' => 'Траурный венок из белых хризантем', 'duration' => 90, 'category' => 'funeral']
     ];
     
     $serviceCheck = $db->prepare("SELECT COUNT(*) FROM services WHERE name = ?");
@@ -194,11 +194,12 @@ try {
     
     // Добавляем автоответы
     $autoResponses = [
-        ['trigger_text' => 'привет', 'response_text' => 'Здравствуйте! Добро пожаловать в наш автосервис. Как мы можем помочь?', 'priority' => 1],
-        ['trigger_text' => 'цена', 'response_text' => 'Цены на наши услуги можно посмотреть в разделе "Услуги". Для точной стоимости рекомендуем записаться на диагностику.', 'priority' => 2],
-        ['trigger_text' => 'время', 'response_text' => 'Мы работаем: Пн-Сб: 9:00-20:00, Вс: 10:00-18:00. Запись по телефону +7 (495) 123-45-67', 'priority' => 3],
-        ['trigger_text' => 'адрес', 'response_text' => 'Наш адрес: г. Москва, ул. Автосервисная, д. 15. Удобная парковка для клиентов.', 'priority' => 4],
-        ['trigger_text' => 'запись', 'response_text' => 'Для записи на сервис звоните +7 (495) 123-45-67 или оставьте заявку на сайте в разделе "Контакты".', 'priority' => 5]
+        ['trigger_text' => 'привет', 'response_text' => 'Здравствуйте! Добро пожаловать в "Цветочный рай"! Поможем выбрать идеальный букет.', 'priority' => 1],
+        ['trigger_text' => 'цена', 'response_text' => 'Цены на букеты указаны в каталоге. Действуют скидки на большие заказы. Доставка от 500 руб.', 'priority' => 2],
+        ['trigger_text' => 'время', 'response_text' => 'Мы работаем ежедневно с 8:00 до 22:00. Доставка цветов круглосуточно! Телефон: +7 (495) 555-77-88', 'priority' => 3],
+        ['trigger_text' => 'адрес', 'response_text' => 'Наш адрес: г. Москва, ул. Цветочная, д. 25. Есть удобная парковка для клиентов.', 'priority' => 4],
+        ['trigger_text' => 'доставка', 'response_text' => 'Доставка по Москве 2-3 часа (500 руб), срочная доставка за 1 час (1000 руб). Заказы принимаем круглосуточно.', 'priority' => 5],
+        ['trigger_text' => 'букет', 'response_text' => 'У нас большой выбор букетов: розы, тюльпаны, пионы, хризантемы. Создаем индивидуальные композиции.', 'priority' => 6]
     ];
     
     $responseCheck = $db->prepare("SELECT COUNT(*) FROM auto_responses WHERE trigger_text = ?");
@@ -213,12 +214,13 @@ try {
     
     // Добавляем начальные настройки
     $settings = [
-        ['setting_key' => 'site_name', 'setting_value' => 'Автосервис', 'setting_type' => 'text', 'description' => 'Название сайта'],
-        ['setting_key' => 'site_description', 'setting_value' => 'Профессиональный автосервис с опытными мастерами', 'setting_type' => 'text', 'description' => 'Описание сайта'],
-        ['setting_key' => 'contact_phone', 'setting_value' => '+7 (495) 123-45-67', 'setting_type' => 'text', 'description' => 'Контактный телефон'],
-        ['setting_key' => 'contact_email', 'setting_value' => 'info@autoservice.ru', 'setting_type' => 'text', 'description' => 'Контактный email'],
-        ['setting_key' => 'contact_address', 'setting_value' => 'г. Москва, ул. Автосервисная, д. 15', 'setting_type' => 'text', 'description' => 'Адрес'],
-        ['setting_key' => 'work_hours', 'setting_value' => 'Пн-Сб: 9:00-20:00, Вс: 10:00-18:00', 'setting_type' => 'text', 'description' => 'Время работы'],
+        ['setting_key' => 'site_name', 'setting_value' => 'Цветочный рай', 'setting_type' => 'text', 'description' => 'Название сайта'],
+        ['setting_key' => 'site_description', 'setting_value' => 'Свежие цветы и красивые букеты на любой повод', 'setting_type' => 'text', 'description' => 'Описание сайта'],
+        ['setting_key' => 'contact_phone', 'setting_value' => '+7 (495) 555-77-88', 'setting_type' => 'text', 'description' => 'Контактный телефон'],
+        ['setting_key' => 'contact_email', 'setting_value' => 'info@flowerparadise.ru', 'setting_type' => 'text', 'description' => 'Контактный email'],
+        ['setting_key' => 'contact_address', 'setting_value' => 'г. Москва, ул. Цветочная, д. 25', 'setting_type' => 'text', 'description' => 'Адрес'],
+        ['setting_key' => 'work_hours', 'setting_value' => 'Ежедневно: 8:00-22:00', 'setting_type' => 'text', 'description' => 'Время работы'],
+        ['setting_key' => 'delivery_hours', 'setting_value' => 'Доставка: круглосуточно', 'setting_type' => 'text', 'description' => 'Время доставки'],
         ['setting_key' => 'chat_enabled', 'setting_value' => '1', 'setting_type' => 'boolean', 'description' => 'Включить чат'],
         ['setting_key' => 'auto_responses_enabled', 'setting_value' => '1', 'setting_type' => 'boolean', 'description' => 'Включить автоответы']
     ];

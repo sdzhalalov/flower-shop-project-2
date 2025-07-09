@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Автосервис - Качественный ремонт и обслуживание</title>
-    <meta name="description" content="Профессиональный автосервис с опытными мастерами. Качественный ремонт, диагностика и обслуживание автомобилей всех марок.">
+    <title>Цветочный рай - Свежие цветы и букеты на заказ</title>
+    <meta name="description" content="Свежие цветы, красивые букеты и композиции на любой повод. Доставка цветов по городу. Широкий выбор роз, тюльпанов, хризантем и других цветов.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
@@ -622,11 +622,11 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">🚗 Автосервис</div>
+                <div class="logo">🌸 Цветочный рай</div>
                 <nav>
                     <ul class="nav-menu">
                         <li><a href="#home">Главная</a></li>
-                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#products">Каталог</a></li>
                         <li><a href="#contact">Контакты</a></li>
                     </ul>
                 </nav>
@@ -652,10 +652,10 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1>Профессиональный автосервис</h1>
-                <p>Качественный ремонт и обслуживание вашего автомобиля</p>
+                <h1>Свежие цветы на любой повод</h1>
+                <p>Красивые букеты, композиции и живые цветы с доставкой по городу</p>
                 <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView()">
-                    Записаться на сервис
+                    Заказать букет
                 </button>
             </div>
         </section>
@@ -666,34 +666,34 @@
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i data-lucide="wrench"></i>
+                            <i data-lucide="flower"></i>
                         </div>
-                        <h3>Опытные мастера</h3>
-                        <p>Наши специалисты имеют многолетний опыт работы с автомобилями всех марок</p>
+                        <h3>Свежие цветы</h3>
+                        <p>Только свежие цветы от проверенных поставщиков. Ежедневные поставки из Голландии</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i data-lucide="clock"></i>
+                            <i data-lucide="truck"></i>
                         </div>
-                        <h3>Быстрое обслуживание</h3>
-                        <p>Мы ценим ваше время и выполняем работы в кратчайшие сроки</p>
+                        <h3>Быстрая доставка</h3>
+                        <p>Доставка по городу в течение 2-3 часов. Срочная доставка за 1 час</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i data-lucide="shield-check"></i>
+                            <i data-lucide="heart"></i>
                         </div>
-                        <h3>Гарантия качества</h3>
-                        <p>Предоставляем гарантию на все виды выполненных работ</p>
+                        <h3>Индивидуальный подход</h3>
+                        <p>Создаем уникальные букеты и композиции по вашим пожеланиям</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="services" id="services">
+        <section class="services" id="products">
             <div class="container">
-                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Наши услуги</h2>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Наш каталог</h2>
                 <div class="services-grid" id="services-grid">
-                    <!-- Services will be loaded here -->
+                    <!-- Products will be loaded here -->
                 </div>
             </div>
         </section>
@@ -703,7 +703,7 @@
                 <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Свяжитесь с нами</h2>
                 <div class="contact-grid">
                     <div class="contact-form">
-                        <h3>Записаться на сервис</h3>
+                        <h3>Заказать букет</h3>
                         <form id="contact-form">
                             <div class="form-group">
                                 <label for="name">Имя</label>
@@ -714,28 +714,31 @@
                                 <input type="tel" id="phone" name="phone" required>
                             </div>
                             <div class="form-group">
-                                <label for="service">Услуга</label>
+                                <label for="service">Повод</label>
                                 <select id="service" name="service" required>
-                                    <option value="">Выберите услугу</option>
-                                    <option value="diagnostics">Диагностика</option>
-                                    <option value="repair">Ремонт</option>
-                                    <option value="maintenance">ТО</option>
+                                    <option value="">Выберите повод</option>
+                                    <option value="birthday">День рождения</option>
+                                    <option value="wedding">Свадьба</option>
+                                    <option value="anniversary">Годовщина</option>
+                                    <option value="funeral">Похороны</option>
+                                    <option value="other">Другое</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="message">Сообщение</label>
-                                <textarea id="message" name="message" placeholder="Опишите проблему или желаемую услугу"></textarea>
+                                <label for="message">Пожелания</label>
+                                <textarea id="message" name="message" placeholder="Опишите желаемый букет, предпочтения по цветам и цвету"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                            <button type="submit" class="btn btn-primary">Заказать букет</button>
                         </form>
                     </div>
                     <div>
                         <h3>Контактная информация</h3>
                         <div style="margin-top: 1rem;">
-                            <p><strong>📍 Адрес:</strong> г. Москва, ул. Автосервисная, д. 15</p>
-                            <p><strong>📞 Телефон:</strong> +7 (495) 123-45-67</p>
-                            <p><strong>📧 Email:</strong> info@autoservice.ru</p>
-                            <p><strong>🕒 Режим работы:</strong> Пн-Сб: 9:00-20:00, Вс: 10:00-18:00</p>
+                            <p><strong>📍 Адрес:</strong> г. Москва, ул. Цветочная, д. 25</p>
+                            <p><strong>📞 Телефон:</strong> +7 (495) 555-77-88</p>
+                            <p><strong>📧 Email:</strong> info@flowerparadise.ru</p>
+                            <p><strong>🕒 Режим работы:</strong> Ежедневно: 8:00-22:00</p>
+                            <p><strong>🚚 Доставка:</strong> Круглосуточно по городу</p>
                         </div>
                     </div>
                 </div>
@@ -749,13 +752,13 @@
                     <h2>Панель администратора</h2>
                     
                     <div class="admin-section">
-                        <h3>Управление услугами</h3>
+                        <h3>Управление товарами</h3>
                         <div class="admin-card">
-                            <h4>Добавить услугу</h4>
+                            <h4>Добавить товар</h4>
                             <form id="add-service-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="service-name">Название услуги</label>
+                                        <label for="service-name">Название букета</label>
                                         <input type="text" id="service-name" required>
                                     </div>
                                     <div class="form-group">
@@ -767,7 +770,7 @@
                                     <label for="service-description">Описание</label>
                                     <textarea id="service-description" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Добавить услугу</button>
+                                <button type="submit" class="btn btn-primary">Добавить товар</button>
                             </form>
                         </div>
                     </div>
@@ -779,11 +782,11 @@
                             <form id="site-settings-form">
                                 <div class="form-group">
                                     <label for="site-title">Название сайта</label>
-                                    <input type="text" id="site-title" value="Автосервис">
+                                    <input type="text" id="site-title" value="Цветочный рай">
                                 </div>
                                 <div class="form-group">
                                     <label for="site-description">Описание</label>
-                                    <textarea id="site-description">Профессиональный автосервис с опытными мастерами</textarea>
+                                    <textarea id="site-description">Свежие цветы и красивые букеты на любой повод</textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Сохранить настройки</button>
                             </form>
@@ -814,22 +817,22 @@
                             </div>
                             
                             <div class="quick-responses">
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Здравствуйте! Как дела?')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Здравствуйте! Добро пожаловать в Цветочный рай!')">
                                     Приветствие
                                 </button>
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Спасибо за обращение! Мы поможем вам.')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Спасибо за обращение! Поможем выбрать идеальный букет.')">
                                     Благодарность
                                 </button>
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы работаем Пн-Сб: 9:00-20:00, Вс: 10:00-18:00')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы работаем ежедневно с 8:00 до 22:00, доставка круглосуточно')">
                                     Время работы
                                 </button>
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Запись по телефону +7 (495) 123-45-67')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Заказ букетов по телефону +7 (495) 555-77-88')">
                                     Телефон
                                 </button>
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Цены на услуги указаны на сайте в разделе «Услуги»')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Цены на букеты указаны в каталоге, возможны скидки')">
                                     Цены
                                 </button>
-                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы находимся по адресу: г. Москва, ул. Автосервисная, д. 15')">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы находимся по адресу: г. Москва, ул. Цветочная, д. 25')">
                                     Адрес
                                 </button>
                             </div>
@@ -847,7 +850,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Автосервис. Все права защищены.</p>
+            <p>&copy; 2024 Цветочный рай. Все права защищены.</p>
         </div>
     </footer>
 
@@ -900,7 +903,7 @@
         
         <div id="chat-window" class="chat-window">
             <div class="chat-header">
-                <h3>Чат с поддержкой</h3>
+                <h3>Помощь с выбором букета</h3>
                 <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
             </div>
             
@@ -923,12 +926,12 @@
 
         // Sample data
         let services = [
-            { id: 1, name: 'Диагностика автомобиля', price: 2500, description: 'Полная компьютерная диагностика всех систем автомобиля' },
-            { id: 2, name: 'Замена масла', price: 1500, description: 'Замена моторного масла и масляного фильтра' },
-            { id: 3, name: 'Ремонт тормозной системы', price: 5000, description: 'Диагностика и ремонт тормозной системы' },
-            { id: 4, name: 'Шиномонтаж', price: 800, description: 'Замена и балансировка колес' },
-            { id: 5, name: 'Техническое обслуживание', price: 3500, description: 'Плановое ТО согласно регламенту производителя' },
-            { id: 6, name: 'Ремонт двигателя', price: 15000, description: 'Диагностика и ремонт двигателя' }
+            { id: 1, name: 'Букет из роз', price: 3500, description: 'Классический букет из 25 красных роз с зеленью' },
+            { id: 2, name: 'Весенний букет', price: 2200, description: 'Нежный букет из тюльпанов и нарциссов' },
+            { id: 3, name: 'Свадебный букет', price: 4500, description: 'Роскошный букет невесты из белых роз и пионов' },
+            { id: 4, name: 'Корзина цветов', price: 5500, description: 'Большая корзина с сезонными цветами' },
+            { id: 5, name: 'Композиция в коробке', price: 3200, description: 'Стильная композиция из роз в подарочной коробке' },
+            { id: 6, name: 'Траурный венок', price: 2800, description: 'Траурный венок из белых хризантем' }
         ];
 
         let currentUser = null;
@@ -1089,7 +1092,7 @@
                 alert('Корзина пуста');
                 return;
             }
-            alert('Заказ оформлен! Мы свяжемся с вами в ближайшее время.');
+            alert('Заказ оформлен! Мы свяжемся с вами для уточнения деталей доставки.');
             cart = [];
             updateCartUI();
             toggleCart();
@@ -1111,7 +1114,7 @@
 
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+            alert('Заказ принят! Мы свяжемся с вами для уточнения деталей.');
             this.reset();
         });
 
@@ -1122,7 +1125,7 @@
             const description = document.getElementById('service-description').value;
             
             addService(name, price, description);
-            alert('Услуга добавлена!');
+            alert('Товар добавлен в каталог!');
             this.reset();
         });
 
