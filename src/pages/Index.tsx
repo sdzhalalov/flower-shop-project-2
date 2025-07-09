@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -64,7 +65,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-teal-50">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-br from-pink-50 to-white"
+    >
       {/* SEO Meta */}
       <div style={{ display: "none" }}>
         <title>{settings.siteSettings.seoTitle}</title>
@@ -200,7 +206,7 @@ const Index = () => {
 
       {/* Footer */}
       <Footer siteSettings={settings.siteSettings} />
-    </div>
+    </motion.div>
   );
 };
 

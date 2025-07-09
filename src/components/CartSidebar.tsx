@@ -1,6 +1,8 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
   SheetContent,
@@ -41,10 +43,17 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Icon name="ShoppingCart" className="h-4 w-4 mr-2" />
-          Корзина ({cartItemsCount})
-        </Button>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Button className="relative bg-pink-600 hover:bg-pink-700">
+            <Icon name="ShoppingBag" className="h-5 w-5 mr-2" />
+            Корзина
+            {cartItemsCount > 0 && (
+              <Badge className="absolute -top-2 -right-2 bg-yellow-400 text-black px-2 py-1 text-xs">
+                {cartItemsCount}
+              </Badge>
+            )}
+          </Button>
+        </motion.div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -53,46 +62,82 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
         </SheetHeader>
         <div className="mt-6 space-y-4">
           {cartItems.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">Корзина пуста</p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-12"
+            >
+              <Icon
+                name="ShoppingBag"
+                className="h-16 w-16 text-gray-300 mx-auto mb-4"
+              />
+              <p className="text-gray-500">Корзина пуста</p>
+              <p className="text-sm text-gray-400 mt-2">
+                Добавьте товары из каталога
+              </p>
+            </motion.div>
           ) : (
             <>
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center space-x-4 p-4 border rounded-lg"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-16 w-16 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-sm text-gray-500">{item.price} ₽</p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() =>
-                        onUpdateQuantity?.(item.id, item.quantity - 1)
-                      }
+              <AnimatePresence>
+                {cartItems.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="flex items-center space-x-4 p-4 border rounded-lg bg-gradient-to-r from-white to-pink-50"
+                  >
+                    <motion.img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-16 w-16 object-cover rounded-lg"
+                      whileHover={{ scale: 1.05 }}
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-900">{item.name}</h4>
+                      <p className="text-lg font-semibold text-pink-600">
+                        {item.price} ₽
+                      </p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <motion.div whileTap={{ scale: 0.9 }}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            onUpdateQuantity?.(item.id, item.quantity - 1)
+                          }
+                        >
+                          <Icon name="Minus" className="h-4 w-4" />
+                        </Button>
+                      </motion.div>
+                      <span className="w-8 text-center font-semibold">
+                        {item.quantity}
+                      </span>
+                      <motion.div whileTap={{ scale: 0.9 }}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            onUpdateQuantity?.(item.id, item.quantity + 1)
+                          }
+                        >
+                          <Icon name="Plus" className="h-4 w-4" />
+                        </Button>
+                      </motion.div>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => onUpdateQuantity?.(item.id, 0)}
+                      className="text-gray-400 hover:text-red-500"
                     >
-                      <Icon name="Minus" className="h-4 w-4" />
-                    </Button>
-                    <span className="w-8 text-center">{item.quantity}</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() =>
-                        onUpdateQuantity?.(item.id, item.quantity + 1)
-                      }
-                    >
-                      <Icon name="Plus" className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              ))}
+                      <Icon name="X" className="h-4 w-4" />
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
               <div className="space-y-2">
                 <div className="flex space-x-2">
                   <Input
@@ -129,9 +174,18 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                   <span>{getTotalPrice?.().toLocaleString()} ₽</span>
                 </div>
               </div>
-              <Button className="w-full" size="lg">
-                Оформить заказ
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Button
+                  className="w-full bg-pink-600 hover:bg-pink-700"
+                  size="lg"
+                >
+                  Оформить заказ
+                </Button>
+              </motion.div>
             </>
           )}
         </div>

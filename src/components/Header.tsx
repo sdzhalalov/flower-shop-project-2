@@ -1,6 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-
 import Icon from "@/components/ui/icon";
 import { User, SiteSettings } from "@/types";
 import CartSidebar from "./CartSidebar";
@@ -27,38 +27,51 @@ const Header: React.FC<HeaderProps> = ({
   cartItemsCount,
 }) => {
   return (
-    <header className="bg-white shadow-sm border-b">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white shadow-md border-b sticky top-0 z-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-4">
-            <Icon name="Flower" className="h-8 w-8 text-pink-500" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center space-x-4"
+          >
+            <span className="text-3xl">🌸</span>
             <h1
-              className="text-2xl font-bold text-gray-900"
+              className="text-2xl font-bold text-pink-600"
               style={{ fontFamily: "Montserrat, sans-serif" }}
             >
-              {siteSettings.siteName}
+              Bloom & Blossom
             </h1>
-          </div>
+          </motion.div>
 
           <nav className="hidden md:flex space-x-8">
-            <a
-              href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors"
+            <motion.a
+              href="#home"
+              className="text-gray-700 hover:text-pink-600 transition-colors font-medium"
+              whileHover={{ scale: 1.05 }}
             >
               Главная
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#catalog"
-              className="text-gray-700 hover:text-pink-500 transition-colors"
+              className="text-gray-700 hover:text-pink-600 transition-colors font-medium"
+              whileHover={{ scale: 1.05 }}
             >
               Каталог
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors"
+            </motion.a>
+            <motion.a
+              href="#contact"
+              className="text-gray-700 hover:text-pink-600 transition-colors font-medium"
+              whileHover={{ scale: 1.05 }}
             >
               Контакты
-            </a>
+            </motion.a>
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -105,7 +118,7 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

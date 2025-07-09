@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -39,9 +40,17 @@ const ProductCatalog: React.FC<ProductCatalogProps> = ({
       : products.filter((product) => product.category === selectedCategory);
 
   return (
-    <section id="catalog" className="py-16 bg-gray-50">
+    <section
+      id="catalog"
+      className="py-16 bg-gradient-to-b from-white to-pink-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
           <h2
             className="text-4xl font-bold text-gray-900 mb-4"
             style={{ fontFamily: "Montserrat, sans-serif" }}
@@ -54,86 +63,132 @@ const ProductCatalog: React.FC<ProductCatalogProps> = ({
           >
             Выберите идеальный букет для любого случая
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Filter */}
-        <div className="mb-8">
-          <Select value={selectedCategory} onValueChange={onCategoryChange}>
-            <SelectTrigger className="w-64 mx-auto">
-              <SelectValue placeholder="Выберите категорию" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((category) => (
-                <SelectItem key={category.value} value={category.value}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8 flex justify-center"
+        >
+          <div className="flex flex-wrap gap-3 justify-center">
+            {categories.map((category, index) => (
+              <motion.div
+                key={category.value}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Button
+                  variant={
+                    selectedCategory === category.value ? "default" : "outline"
+                  }
+                  onClick={() => onCategoryChange(category.value)}
+                  className={`${
+                    selectedCategory === category.value
+                      ? "bg-pink-600 hover:bg-pink-700"
+                      : "hover:bg-pink-50 hover:border-pink-300"
+                  }`}
+                >
                   {category.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <Card
-              key={product.id}
-              className="overflow-hidden hover:shadow-lg transition-shadow animate-fade-in"
-            >
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover"
-                />
-                <Badge className="absolute top-4 right-4 bg-white text-gray-800">
-                  {product.category === "bouquets"
-                    ? "Букеты"
-                    : product.category === "compositions"
-                      ? "Композиции"
-                      : "Свадебные"}
-                </Badge>
-                {product.featured && (
-                  <Badge className="absolute top-4 left-4 bg-pink-500 text-white">
-                    Хит
-                  </Badge>
-                )}
-              </div>
-              <CardHeader>
-                <CardTitle className="text-lg">{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-2xl font-bold text-gray-900">
-                        {product.price.toLocaleString()} ₽
-                      </span>
-                      {product.oldPrice && (
-                        <span className="text-lg text-gray-500 line-through">
-                          {product.oldPrice.toLocaleString()} ₽
-                        </span>
-                      )}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          <AnimatePresence>
+            {filteredProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden h-full flex flex-col group cursor-pointer">
+                  <div className="relative overflow-hidden">
+                    <motion.img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Icon
+                          name="Heart"
+                          className="h-6 w-6 text-white hover:text-pink-500"
+                        />
+                      </motion.button>
                     </div>
-                    {!product.inStock && (
-                      <Badge variant="destructive" className="mt-1">
-                        Нет в наличии
+                    {product.featured && (
+                      <Badge className="absolute top-2 left-2 bg-pink-600 text-white">
+                        Хит
                       </Badge>
                     )}
                   </div>
-                  <Button
-                    onClick={() => onAddToCart(product)}
-                    className="bg-pink-500 hover:bg-pink-600"
-                    disabled={!product.inStock}
-                  >
-                    <Icon name="ShoppingCart" className="h-4 w-4 mr-2" />В
-                    корзину
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+
+                  <CardHeader className="flex-1">
+                    <CardTitle className="text-lg">{product.name}</CardTitle>
+                    <CardDescription className="text-sm text-gray-600">
+                      {product.description}
+                    </CardDescription>
+
+                    <div className="flex items-center mt-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Icon
+                          key={i}
+                          name="Star"
+                          className={`w-4 h-4 ${i < 4 ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                        />
+                      ))}
+                      <span className="ml-2 text-sm text-gray-600">(4.8)</span>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-2xl font-bold text-pink-600">
+                          {product.price.toLocaleString()} ₽
+                        </span>
+                        {product.oldPrice && (
+                          <span className="text-sm text-gray-500 line-through ml-2">
+                            {product.oldPrice.toLocaleString()} ₽
+                          </span>
+                        )}
+                      </div>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button
+                          onClick={() => onAddToCart(product)}
+                          size="sm"
+                          className="bg-pink-600 hover:bg-pink-700"
+                          disabled={!product.inStock}
+                        >
+                          <Icon name="Plus" className="h-4 w-4 mr-1" />В корзину
+                        </Button>
+                      </motion.div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
