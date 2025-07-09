@@ -375,6 +375,247 @@
         .form-row .form-group {
             flex: 1;
         }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .chat-toggle:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+        
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-window.open {
+            display: flex;
+        }
+        
+        .chat-header {
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8fafc;
+        }
+        
+        .chat-message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+        
+        .chat-message.guest {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chat-message.moderator {
+            align-self: flex-start;
+        }
+        
+        .chat-message.auto {
+            opacity: 0.8;
+        }
+        
+        .message-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.guest {
+            background: #2563eb;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-bubble.moderator {
+            background: #e5e7eb;
+            color: #374151;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 0.25rem;
+        }
+        
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* Moderator Panel */
+        .moderator-panel {
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .chats-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .chat-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chat-item:hover {
+            border-color: #2563eb;
+            transform: translateY(-1px);
+        }
+        
+        .chat-item.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        
+        .chat-conversation {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .conversation-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-responses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-response-btn {
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+        
+        .quick-response-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+        
+        .moderator-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .moderator-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+        
+        .typing-indicator {
+            display: none;
+            padding: 0.5rem 1rem;
+            color: #6b7280;
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+        
+        .online-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .chat-window {
+                width: 300px;
+                height: 450px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -551,6 +792,57 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Moderator Panel -->
+        <div id="moderator-panel" class="hidden">
+            <div class="container">
+                <div class="moderator-panel">
+                    <h2>Панель модератора</h2>
+                    
+                    <div class="admin-section">
+                        <h3>Активные чаты</h3>
+                        <div class="chats-list" id="chats-list">
+                            <!-- Chats will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h3>Чат с клиентом</h3>
+                        <div class="chat-conversation">
+                            <div class="conversation-messages" id="conversation-messages">
+                                <!-- Messages will be loaded here -->
+                            </div>
+                            
+                            <div class="quick-responses">
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Здравствуйте! Как дела?')">
+                                    Приветствие
+                                </button>
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Спасибо за обращение! Мы поможем вам.')">
+                                    Благодарность
+                                </button>
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы работаем Пн-Сб: 9:00-20:00, Вс: 10:00-18:00')">
+                                    Время работы
+                                </button>
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Запись по телефону +7 (495) 123-45-67')">
+                                    Телефон
+                                </button>
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Цены на услуги указаны на сайте в разделе «Услуги»')">
+                                    Цены
+                                </button>
+                                <button class="quick-response-btn" onclick="sendQuickResponse('Мы находимся по адресу: г. Москва, ул. Автосервисная, д. 15')">
+                                    Адрес
+                                </button>
+                            </div>
+                            
+                            <div class="moderator-input">
+                                <input type="text" id="moderator-input" placeholder="Напишите сообщение..." onkeypress="handleModeratorKeyPress(event)">
+                                <button class="btn btn-primary" onclick="sendModeratorMessage()">Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -596,6 +888,31 @@
                 <p><strong>Тестовые данные:</strong></p>
                 <p>Админ: admin / admin</p>
                 <p>Модератор: moderator1 / moderator</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i data-lucide="message-circle"></i>
+        </button>
+        
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                <h3>Чат с поддержкой</h3>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will appear here -->
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Напишите сообщение..." onkeypress="handleChatKeyPress(event)">
+                <button onclick="sendMessage()">
+                    <i data-lucide="send"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -687,7 +1004,8 @@
 
         function showModeratorPanel() {
             if (currentUser && currentUser.role === 'moderator') {
-                alert('Панель модератора открыта');
+                document.getElementById('moderator-panel').classList.remove('hidden');
+                loadChats();
             }
         }
 
@@ -823,9 +1141,311 @@
             }
         }
 
+        // Chat System
+        let chatOpen = false;
+        let guestId = null;
+        let currentChatId = null;
+        let lastMessageId = null;
+        let chatPollingInterval = null;
+        let currentChats = [];
+        let selectedChatId = null;
+        
+        // Generate guest ID
+        function generateGuestId() {
+            if (!guestId) {
+                guestId = 'guest_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+            return guestId;
+        }
+        
+        // Toggle chat window
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            chatOpen = !chatOpen;
+            chatWindow.classList.toggle('open', chatOpen);
+            
+            if (chatOpen) {
+                startChatPolling();
+            } else {
+                stopChatPolling();
+            }
+        }
+        
+        // Start polling for new messages
+        function startChatPolling() {
+            if (chatPollingInterval) return;
+            
+            chatPollingInterval = setInterval(() => {
+                if (currentChatId) {
+                    pollForMessages();
+                }
+            }, 2000);
+        }
+        
+        // Stop polling
+        function stopChatPolling() {
+            if (chatPollingInterval) {
+                clearInterval(chatPollingInterval);
+                chatPollingInterval = null;
+            }
+        }
+        
+        // Poll for new messages
+        function pollForMessages() {
+            const url = `api/chat.php?action=poll&chat_id=${currentChatId}&last_message_id=${lastMessageId || ''}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(messages => {
+                    if (messages.length > 0) {
+                        messages.forEach(message => {
+                            addMessageToChat(message);
+                            lastMessageId = message.id;
+                        });
+                        scrollChatToBottom();
+                    }
+                })
+                .catch(error => console.error('Error polling messages:', error));
+        }
+        
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const data = {
+                action: 'send_message',
+                guest_id: generateGuestId(),
+                message: message,
+                sender_type: 'guest',
+                sender_name: 'Гость'
+            };
+            
+            fetch('api/chat.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    currentChatId = result.chat.id;
+                    addMessageToChat(result.message);
+                    lastMessageId = result.message.id;
+                    
+                    // Add auto response if present
+                    if (result.auto_response) {
+                        setTimeout(() => {
+                            addMessageToChat(result.auto_response);
+                            lastMessageId = result.auto_response.id;
+                        }, 1000);
+                    }
+                    
+                    input.value = '';
+                    scrollChatToBottom();
+                }
+            })
+            .catch(error => console.error('Error sending message:', error));
+        }
+        
+        // Add message to chat
+        function addMessageToChat(message) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.sender_type}${message.is_auto ? ' auto' : ''}`;
+            
+            const time = new Date(message.timestamp).toLocaleTimeString('ru-RU', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble ${message.sender_type}">
+                    ${message.message}
+                </div>
+                <div class="message-time">${time}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+        }
+        
+        // Scroll chat to bottom
+        function scrollChatToBottom() {
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Handle Enter key in chat input
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Moderator functions
+        function showModeratorPanel() {
+            if (currentUser && currentUser.role === 'moderator') {
+                document.getElementById('moderator-panel').classList.remove('hidden');
+                loadChats();
+            }
+        }
+        
+        function hideModeratorPanel() {
+            document.getElementById('moderator-panel').classList.add('hidden');
+        }
+        
+        // Load chats for moderator
+        function loadChats() {
+            fetch('api/chat.php?action=chats')
+                .then(response => response.json())
+                .then(chats => {
+                    currentChats = chats;
+                    renderChats();
+                })
+                .catch(error => console.error('Error loading chats:', error));
+        }
+        
+        // Render chats list
+        function renderChats() {
+            const chatsList = document.getElementById('chats-list');
+            chatsList.innerHTML = currentChats.map(chat => `
+                <div class="chat-item ${chat.id === selectedChatId ? 'active' : ''}" onclick="selectChat('${chat.id}')">
+                    <div style="display: flex; align-items: center;">
+                        <span class="online-indicator"></span>
+                        <strong>${chat.guest_name}</strong>
+                    </div>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #6b7280;">
+                        Последнее сообщение: ${new Date(chat.last_message_at).toLocaleString('ru-RU')}
+                    </p>
+                </div>
+            `).join('');
+        }
+        
+        // Select chat for moderator
+        function selectChat(chatId) {
+            selectedChatId = chatId;
+            renderChats();
+            loadChatMessages(chatId);
+        }
+        
+        // Load messages for selected chat
+        function loadChatMessages(chatId) {
+            fetch(`api/chat.php?action=messages&chat_id=${chatId}`)
+                .then(response => response.json())
+                .then(messages => {
+                    const messagesContainer = document.getElementById('conversation-messages');
+                    messagesContainer.innerHTML = messages.map(message => {
+                        const time = new Date(message.timestamp).toLocaleTimeString('ru-RU', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                        });
+                        
+                        return `
+                            <div class="chat-message ${message.sender_type}${message.is_auto ? ' auto' : ''}">
+                                <div class="message-bubble ${message.sender_type}">
+                                    ${message.message}
+                                </div>
+                                <div class="message-time">${time}</div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                })
+                .catch(error => console.error('Error loading messages:', error));
+        }
+        
+        // Send quick response
+        function sendQuickResponse(response) {
+            if (!selectedChatId) {
+                alert('Выберите чат для ответа');
+                return;
+            }
+            
+            const selectedChat = currentChats.find(chat => chat.id === selectedChatId);
+            if (!selectedChat) return;
+            
+            const data = {
+                action: 'quick_response',
+                guest_id: selectedChat.guest_id,
+                quick_response: response,
+                sender_name: currentUser.name
+            };
+            
+            fetch('api/chat.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    loadChatMessages(selectedChatId);
+                    loadChats(); // Refresh chats to update last message time
+                }
+            })
+            .catch(error => console.error('Error sending quick response:', error));
+        }
+        
+        // Send moderator message
+        function sendModeratorMessage() {
+            const input = document.getElementById('moderator-input');
+            const message = input.value.trim();
+            
+            if (!message || !selectedChatId) return;
+            
+            const selectedChat = currentChats.find(chat => chat.id === selectedChatId);
+            if (!selectedChat) return;
+            
+            const data = {
+                action: 'send_message',
+                guest_id: selectedChat.guest_id,
+                message: message,
+                sender_type: 'moderator',
+                sender_name: currentUser.name
+            };
+            
+            fetch('api/chat.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    loadChatMessages(selectedChatId);
+                    loadChats();
+                    input.value = '';
+                }
+            })
+            .catch(error => console.error('Error sending message:', error));
+        }
+        
+        // Handle Enter key in moderator input
+        function handleModeratorKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendModeratorMessage();
+            }
+        }
+        
         // Initialize
         renderServices();
         updateCartUI();
+        
+        // Start chat polling when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (chatOpen) {
+                startChatPolling();
+            }
+        });
     </script>
 </body>
 </html>
