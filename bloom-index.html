@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom & Blossom - Цветочный магазин</title>
+    <meta name="description" content="Свежие цветы и красивые букеты на любой повод. Доставка по Москве.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    🌸 Bloom & Blossom
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#catalog" class="nav-link">Каталог</a></li>
+                    <li><a href="#contact" class="nav-link">Контакты</a></li>
+                </ul>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="cart-btn" id="cartBtn">
+                        🛒 Корзина
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        ☰
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная секция -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Bloom & Blossom</h1>
+            <p>Свежие цветы и красивые букеты на любой повод. Создаем незабываемые моменты с помощью природной красоты.</p>
+            <a href="#catalog" class="btn">Посмотреть каталог</a>
+        </div>
+    </section>
+
+    <!-- Каталог -->
+    <section class="section" id="catalog">
+        <div class="container">
+            <h2 class="text-center mb-20">Наш каталог</h2>
+            
+            <!-- Фильтры -->
+            <div class="filters">
+                <div class="container">
+                    <div class="filter-tabs" id="categoryFilters">
+                        <!-- Категории загружаются через JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Товары -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Товары загружаются через JavaScript -->
+                <div class="text-center" style="grid-column: 1 / -1;">
+                    <p>Загрузка товаров...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-20">Контакты</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div>
+                    <h3>📍 Адрес</h3>
+                    <p>г. Москва, ул. Цветочная, д. 25</p>
+                    
+                    <h3 style="margin-top: 20px;">📞 Телефон</h3>
+                    <p>+7 (495) 555-77-88</p>
+                    
+                    <h3 style="margin-top: 20px;">📧 Email</h3>
+                    <p>info@bloomblossom.ru</p>
+                </div>
+                
+                <div>
+                    <h3>🕒 Время работы</h3>
+                    <p>Ежедневно: 8:00-22:00</p>
+                    
+                    <h3 style="margin-top: 20px;">🚚 Доставка</h3>
+                    <p>Круглосуточно по Москве</p>
+                    <p>Обычная доставка: 2-3 часа (500 руб)</p>
+                    <p>Срочная доставка: 1 час (1000 руб)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Корзина (боковая панель) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3 class="cart-title">Корзина</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Товары корзины загружаются через JavaScript -->
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="btn" id="checkoutBtn" style="width: 100%;">
+                Оформить заказ
+            </button>
+        </div>
+    </div>
+
+    <!-- Форма заказа -->
+    <div id="orderFormContainer" style="display: none;">
+        <div class="section">
+            <div class="container">
+                <form class="order-form" id="orderForm">
+                    <h2 class="text-center mb-20">Оформление заказа</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="customer_name">Имя *</label>
+                        <input type="text" class="form-input" id="customer_name" name="customer_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="customer_phone">Телефон *</label>
+                        <input type="tel" class="form-input" id="customer_phone" name="customer_phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="customer_address">Адрес доставки *</label>
+                        <textarea class="form-textarea" id="customer_address" name="customer_address" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="comment">Комментарий к заказу</label>
+                        <textarea class="form-textarea" id="comment" name="comment" placeholder="Особые пожелания, время доставки..."></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: center;">
+                        <button type="submit" class="btn">Заказать</button>
+                        <button type="button" class="btn btn-outline" onclick="app.hideOrderForm()">Отмена</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Чат -->
+    <button class="chat-button" id="chatButton">💬</button>
+    
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <span class="chat-title">Онлайн консультация</span>
+            <button class="close-chat" id="closeChat">×</button>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <!-- Сообщения загружаются через JavaScript -->
+        </div>
+        
+        <form class="chat-input-container" id="chatForm">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Напишите ваш вопрос..." required>
+            <button type="submit" class="send-message">➤</button>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

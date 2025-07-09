@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Bloom & Blossom</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Боковое меню -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>🌸 Admin Panel</h2>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    📊 Дашборд
+                </a>
+                <a href="#orders" class="nav-item" data-section="orders">
+                    📦 Заказы
+                </a>
+                <a href="#products" class="nav-item" data-section="products">
+                    🌸 Товары
+                </a>
+                <a href="#categories" class="nav-item" data-section="categories">
+                    📂 Категории
+                </a>
+                <a href="#chat" class="nav-item" data-section="chat">
+                    💬 Чат
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    ⚙️ Настройки
+                </a>
+            </nav>
+            
+            <div class="admin-user">
+                <div class="user-info">
+                    <span id="userName">Пользователь</span>
+                    <small id="userRole">Роль</small>
+                </div>
+                <button class="btn-logout" onclick="logout()">Выход</button>
+            </div>
+        </aside>
+        
+        <!-- Основной контент -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="pageTitle">Дашборд</h1>
+                <div class="header-actions">
+                    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                </div>
+            </header>
+            
+            <div class="admin-content">
+                <!-- Дашборд -->
+                <section id="dashboard-section" class="admin-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalOrders">0</div>
+                            <div class="stat-label">Всего заказов</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="pendingOrders">0</div>
+                            <div class="stat-label">Новых заказов</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalProducts">0</div>
+                            <div class="stat-label">Товаров</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="openChats">0</div>
+                            <div class="stat-label">Открытых чатов</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-tables">
+                        <div class="table-section">
+                            <h3>Последние заказы</h3>
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>№ заказа</th>
+                                            <th>Клиент</th>
+                                            <th>Сумма</th>
+                                            <th>Статус</th>
+                                            <th>Дата</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentOrdersTable">
+                                        <!-- Данные загружаются через JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Заказы -->
+                <section id="orders-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Управление заказами</h2>
+                        <div class="filter-controls">
+                            <select id="orderStatusFilter">
+                                <option value="">Все статусы</option>
+                                <option value="pending">Новые</option>
+                                <option value="processing">В обработке</option>
+                                <option value="completed">Завершенные</option>
+                                <option value="cancelled">Отмененные</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>№ заказа</th>
+                                    <th>Клиент</th>
+                                    <th>Телефон</th>
+                                    <th>Адрес</th>
+                                    <th>Сумма</th>
+                                    <th>Статус</th>
+                                    <th>Дата</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTable">
+                                <!-- Данные загружаются через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Товары -->
+                <section id="products-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Управление товарами</h2>
+                        <button class="btn" onclick="showAddProductModal()">Добавить товар</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Категория</th>
+                                    <th>Цена</th>
+                                    <th>Остаток</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTable">
+                                <!-- Данные загружаются через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Категории -->
+                <section id="categories-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Управление категориями</h2>
+                        <button class="btn" onclick="showAddCategoryModal()">Добавить категорию</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Slug</th>
+                                    <th>Товаров</th>
+                                    <th>Порядок</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriesTable">
+                                <!-- Данные загружаются через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Чат -->
+                <section id="chat-section" class="admin-section">
+                    <div class="chat-admin">
+                        <div class="chat-list">
+                            <h3>Список чатов</h3>
+                            <div id="chatsList">
+                                <!-- Список чатов загружается через JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="chat-conversation">
+                            <div class="chat-header">
+                                <h3 id="currentChatTitle">Выберите чат</h3>
+                            </div>
+                            <div class="chat-messages" id="adminChatMessages">
+                                <!-- Сообщения загружаются через JavaScript -->
+                            </div>
+                            <div class="chat-input">
+                                <form id="adminChatForm">
+                                    <input type="text" id="adminChatInput" placeholder="Введите сообщение..." disabled>
+                                    <button type="submit" disabled>Отправить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Настройки -->
+                <section id="settings-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Настройки сайта</h2>
+                        <button class="btn" onclick="saveSettings()">Сохранить изменения</button>
+                    </div>
+                    
+                    <div class="settings-form" id="settingsForm">
+                        <!-- Настройки загружаются через JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Модальные окна -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal" id="productModal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Добавить товар</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="productForm" class="modal-body">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select name="category_id" id="productCategorySelect" required>
+                        <!-- Опции загружаются через JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Цена</label>
+                    <input type="number" name="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Количество</label>
+                    <input type="number" name="stock_quantity" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Отмена</button>
+                    <button type="submit" class="btn">Сохранить</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal" id="categoryModal">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">Добавить категорию</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="categoryForm" class="modal-body">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Порядок сортировки</label>
+                    <input type="number" name="sort_order" value="0">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Отмена</button>
+                    <button type="submit" class="btn">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

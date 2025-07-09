@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в админ-панель - Bloom & Blossom</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f8f3f4 100%);
+        }
+        
+        .login-form {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .error-message {
+            background: #ffe6e6;
+            color: #d8000c;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" id="loginForm">
+            <div class="login-logo">
+                <h1>🌸 Bloom & Blossom</h1>
+                <p>Админ-панель</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <div class="form-group">
+                <label class="form-label" for="username">Логин</label>
+                <input type="text" class="form-input" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Пароль</label>
+                <input type="password" class="form-input" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%;">Войти</button>
+            
+            <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-light);">
+                <p>Тестовые аккаунты:</p>
+                <p><strong>admin</strong> / <strong>password</strong> (Администратор)</p>
+                <p><strong>moderator</strong> / <strong>password</strong> (Модератор)</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            formData.append('action', 'login');
+            
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Скрываем предыдущие сообщения
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            try {
+                const response = await fetch('../api/auth.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    successMessage.textContent = 'Успешный вход! Перенаправление...';
+                    successMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                } else {
+                    errorMessage.textContent = result.message || 'Ошибка входа';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                errorMessage.textContent = 'Произошла ошибка при входе';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
