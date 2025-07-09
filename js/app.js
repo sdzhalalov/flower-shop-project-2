@@ -17,6 +17,8 @@ class BloomApp {
     this.setupEventListeners();
     this.updateCartUI();
     this.initChat();
+    this.addScrollAnimations();
+    this.initSmoothScroll();
   }
 
   // Загрузка категорий
@@ -105,7 +107,7 @@ class BloomApp {
       const inCart = this.cart.find((item) => item.id === product.id);
 
       html += `
-                <div class="product-card fade-in" data-product-id="${product.id}">
+                <div class="product-card" data-product-id="${product.id}">
                     <div class="product-image">
                         ${
                           product.image
@@ -131,6 +133,14 @@ class BloomApp {
     });
 
     productsContainer.innerHTML = html;
+
+    // Добавляем анимации для новых элементов
+    setTimeout(() => {
+      document.querySelectorAll(".product-card").forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add("fade-in-up");
+      });
+    }, 100);
   }
 
   // Добавление в корзину
@@ -160,6 +170,18 @@ class BloomApp {
     this.saveCart();
     this.updateCartUI();
     this.renderProducts(); // Обновляем отображение товаров
+
+    // Анимация кнопки
+    const button = document.querySelector(
+      `[data-product-id="${productId}"] .add-to-cart`,
+    );
+    if (button) {
+      button.style.animation = "pulse 0.3s ease-out";
+      setTimeout(() => {
+        button.style.animation = "";
+      }, 300);
+    }
+
     this.showNotification("Товар добавлен в корзину");
   }
 
@@ -601,10 +623,10 @@ class BloomApp {
     }).format(price);
   }
 
-  // Показ уведомления
+  // Показ уведомления с анимацией
   showNotification(message) {
-    // Создаем элемент уведомления
     const notification = document.createElement("div");
+    notification.className = "notification";
     notification.style.cssText = `
             position: fixed;
             top: 20px;
@@ -617,17 +639,65 @@ class BloomApp {
             z-index: 10000;
             max-width: 300px;
             word-wrap: break-word;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.3s ease-out;
         `;
     notification.textContent = message;
 
     document.body.appendChild(notification);
 
-    // Удаляем через 3 секунды
+    // Анимация появления
     setTimeout(() => {
-      if (notification.parentElement) {
-        notification.remove();
-      }
+      notification.style.transform = "translateX(0)";
+      notification.style.opacity = "1";
+    }, 100);
+
+    // Анимация исчезновения и удаление
+    setTimeout(() => {
+      notification.style.transform = "translateX(100%)";
+      notification.style.opacity = "0";
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.remove();
+        }
+      }, 300);
     }, 3000);
+  }
+
+  // Добавление анимаций при скролле
+  addScrollAnimations() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-up");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    // Наблюдаем за элементами товаров
+    document.querySelectorAll(".product-card, .section h2").forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Плавная прокрутка
+  initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
   }
 }
 

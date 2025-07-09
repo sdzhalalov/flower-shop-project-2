@@ -1,9 +1,23 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    exit(0);
+}
+
 session_start();
 require_once '../config.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
-$pdo = getDatabase();
+
+try {
+    $pdo = getDatabase();
+} catch (Exception $e) {
+    jsonResponse(['success' => false, 'message' => 'Ошибка подключения к базе данных: ' . $e->getMessage()], 500);
+}
 
 // Авторизация
 if ($method === 'POST' && isset($_POST['action']) && $_POST['action'] === 'login') {

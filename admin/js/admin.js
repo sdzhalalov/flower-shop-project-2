@@ -20,10 +20,18 @@ class AdminPanel {
   // Проверка авторизации
   async checkAuth() {
     try {
-      const response = await fetch("../api/auth.php");
+      const response = await fetch("../api/auth.php", {
+        method: "GET",
+        credentials: "same-origin",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const result = await response.json();
 
-      if (!result.logged_in) {
+      if (!result.success || !result.logged_in) {
         window.location.href = "login.html";
         return;
       }
